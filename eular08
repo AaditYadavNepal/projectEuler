@@ -1,0 +1,37 @@
+#include<cstdlib>
+#include<iostream>
+//#include<string>
+//#include<sstream>
+#include<fstream>
+using namespace std;
+
+int main(int argc, char * argv[]) {
+
+    ifstream in;
+    string file = argv[1];
+    in.open(file.c_str());
+    if(!in.good()) {
+        cerr << "Cannot open file" << endl;
+        return 1;
+    }
+
+    string line;
+    getline(in, line);
+    int max = 0;
+
+    for(unsigned int i = 0; i < line.length() - 5; ++i) {
+        int prod = 1;
+        for(unsigned int j = 0; j < 5; ++j) {
+            string substring = line.substr(i+j, 1);
+            int p = atoi(substring.c_str());
+            prod *= p;
+        }
+        if(max <= prod)
+            max = prod;
+    }
+
+    cout << max << endl;
+
+    return 0;
+
+}
